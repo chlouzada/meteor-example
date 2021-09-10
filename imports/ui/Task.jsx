@@ -2,7 +2,7 @@ import React from "react";
 
 export const Task = ({ task, onCheckboxClick, onDeleteClick }) => {
   return (
-    <li className="flex p-4 border-b border-gray-200 ">
+    <li className="flex items-center p-4 border-b border-gray-200 ">
       <input
         type="checkbox"
         checked={!!task.isChecked}
