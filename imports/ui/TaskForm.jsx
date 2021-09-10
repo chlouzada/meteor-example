@@ -18,14 +18,15 @@ export default function TaskForm() {
   };
 
   return (
-    <form onSubmit={submitHandler}>
+    <form onSubmit={submitHandler} class="flex m-4">
       <input
         type="text"
         value={text}
         onChange={(event) => setText(event.target.value)}
         placeholder="Adicione o título da sua tarefa"
+        class="flex-grow box-border px-4 py-2 bg-transparent border border-gray-300 w-full text-base mr-4 outline-none"
       />
-      <button type="submit">Adicionar Tarefa</button>
+      <button class="bg-blue-500 whitespace-nowrap px-2 border border-gray-600" type="submit">Add Task</button>
     </form>
   );
 }

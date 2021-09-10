@@ -23,15 +23,24 @@ export const App = () => {
 
   return (
     <div>
-      <h1>Welcome to Meteor!</h1>
+      <header class="bg-gradient-to-r from-blue-400 to-purple-900 p-4 shadow-sm">
+        <h1 class="text-2xl mr-4">📝️ To Do List</h1>
+      </header>
 
-      <TaskForm />
+      <div class="flex flex-col flex-grow overflow-auto bg-white">
+        <TaskForm />
 
-      <ul>
-        {tasks.map((task) => (
-          <Task key={task._id} task={task} onCheckboxClick={toggleChecked} onDeleteClick={deleteTask}/>
-        ))}
-      </ul>
+        <ul class="list-none px-4">
+          {tasks.map((task) => (
+            <Task
+              key={task._id}
+              task={task}
+              onCheckboxClick={toggleChecked}
+              onDeleteClick={deleteTask}
+            />
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };
