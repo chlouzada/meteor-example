@@ -31,10 +31,20 @@ export const App = () => {
     setHideCompleted(!hideCompleted);
   };
 
+  const pendingTasksCount = useTracker(() =>
+    TasksCollection.find(completedFilter).count()
+  );
+
+  const pendingTasksTitle = `${
+    pendingTasksCount ? ` (${pendingTasksCount})` : ''
+  }`;
+
+
+
   return (
     <div>
       <header className="bg-gradient-to-r from-blue-400 to-purple-900 p-4 shadow-sm">
-        <h1 className="text-2xl mr-4">📝️ To Do List</h1>
+        <h1 className="text-2xl mr-4">📝️ To Do List {pendingTasksTitle}</h1>
       </header>
 
       <div className="flex flex-col flex-grow overflow-auto bg-white">
