@@ -19,8 +19,11 @@ export const LoginForm = () => {
           </h2>
           <form onSubmit={handleSubmit}>
             <div className="relative mb-4">
-              <label htmlFor="username" className="leading-7 text-sm text-gray-600">
-                Usernane
+              <label
+                htmlFor="username"
+                className="leading-7 text-sm text-gray-600"
+              >
+                Username
               </label>
               <input
                 type="text"
@@ -31,7 +34,10 @@ export const LoginForm = () => {
               />
             </div>
             <div className="relative mb-4">
-              <label htmlFor="password" className="leading-7 text-sm text-gray-600">
+              <label
+                htmlFor="password"
+                className="leading-7 text-sm text-gray-600"
+              >
                 Password
               </label>
               <input

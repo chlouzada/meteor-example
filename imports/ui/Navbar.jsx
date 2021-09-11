@@ -9,9 +9,14 @@ export default function Navbar({ pendingTasksTitle, user, logoutHandler }) {
           <h1 className="ml-3 text-xl">To Do List</h1>
           <span className="ml-3 text-xl">{pendingTasksTitle}</span>
         </a>
-        { user && <button onClick={logoutHandler} className="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base ml-auto">
-          {user.username} 🚪
-        </button>}
+        {user && (
+          <button
+            onClick={logoutHandler}
+            className="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base ml-auto"
+          >
+            {user.username} 🚪
+          </button>
+        )}
       </div>
     </header>
   );

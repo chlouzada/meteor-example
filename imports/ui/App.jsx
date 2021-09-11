@@ -59,10 +59,13 @@ export const App = () => {
     setHideCompleted(!hideCompleted);
   };
 
-
   return (
     <div>
-      <Navbar pendingTasksTitle={pendingTasksTitle} user={user} logoutHandler={logout}/>
+      <Navbar
+        pendingTasksTitle={pendingTasksTitle}
+        user={user}
+        logoutHandler={logout}
+      />
 
       <div className="container flex flex-col flex-grow mx-auto overflow-auto bg-white">
         {user ? (
