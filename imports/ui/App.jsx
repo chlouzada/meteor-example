@@ -5,6 +5,7 @@ import { TasksCollection } from "/imports/api/collections/TasksCollection";
 import { Task } from "./Task.jsx";
 import TaskForm from "./TaskForm.jsx";
 import { LoginForm } from "./LoginForm.jsx";
+import Navbar from "./Navbar.jsx";
 
 export const App = () => {
   const [hideCompleted, setHideCompleted] = useState(false);
@@ -61,13 +62,9 @@ export const App = () => {
 
   return (
     <div>
-      <header className="bg-gradient-to-r from-blue-400 to-purple-600 p-4 shadow-sm flex">
-        <h1 className="text-2xl mr-4">📝️ To Do List {pendingTasksTitle}</h1>
+      <Navbar pendingTasksTitle={pendingTasksTitle} user={user} logoutHandler={logout}/>
 
-        {user && <div className="font-medium text-lg ml-auto" onClick={logout}>{user.username} 🚪</div>}
-      </header>
-
-      <div className="flex flex-col flex-grow overflow-auto bg-white">
+      <div className="container flex flex-col flex-grow mx-auto overflow-auto bg-white">
         {user ? (
           <Fragment>
             <TaskForm user={user} />
