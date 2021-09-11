@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { TasksCollection } from "../api/collections/TasksCollection";
 
-export default function TaskForm() {
+export default function TaskForm({user}) {
   const [text, setText] = useState("");
 
   const submitHandler = (event) => {
@@ -11,6 +11,7 @@ export default function TaskForm() {
 
     TasksCollection.insert({
       text: text.trim(),
+      userId: user._id,
       createdAt: new Date(),
     });
 
