@@ -9,11 +9,6 @@ export default function TaskForm({ user }) {
 
     if (!text) return;
 
-    // TasksCollection.insert({
-    //   text: text.trim(),
-    //   userId: user._id,
-    //   createdAt: new Date(),
-    // });
     Meteor.call("tasks.insert", text.trim());
 
     setText("");

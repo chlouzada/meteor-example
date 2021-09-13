@@ -1,7 +1,7 @@
 import React, { useState, Fragment } from "react";
 import { Meteor } from "meteor/meteor";
 import { useTracker } from "meteor/react-meteor-data";
-import { TasksCollection } from '/imports/db/TasksCollection';
+import { TasksCollection } from "/imports/db/TasksCollection";
 import { Task } from "./Task.jsx";
 import TaskForm from "./TaskForm.jsx";
 import { LoginForm } from "./LoginForm.jsx";
@@ -19,41 +19,35 @@ export const App = () => {
 
   const pendingOnlyFilter = { ...completedFilter, ...userFilter };
 
-  const tasks = useTracker(() => {
-    if (!user) {
-      return [];
-    }
-    return TasksCollection.find(
+  const { tasks, pendingTasksCount, isLoading } = useTracker(() => {
+    const noDataAvailable = { tasks: [], pendingTasksCount: 0 };
+    if (!Meteor.user()) return noDataAvailable;
+
+    const handler = Meteor.subscribe("tasks");
+
+    if (!handler.ready()) return { ...noDataAvailable, isLoading: true };
+
+    const tasks = TasksCollection.find(
       hideCompleted ? pendingOnlyFilter : userFilter,
       {
         sort: { createdAt: -1 },
       }
     ).fetch();
+    const pendingTasksCount = TasksCollection.find(pendingOnlyFilter).count();
+
+    return { tasks, pendingTasksCount };
   });
 
-  const pendingTasksCount = useTracker(() => {
-    if (!user) {
-      return 0;
-    }
+  const toggleChecked = ({ _id, isChecked }) => {
 
-    return TasksCollection.find(pendingOnlyFilter).count();
-  });
+    Meteor.call("tasks.setIsChecked", _id, !isChecked);
+  };
 
   const pendingTasksTitle = `${
     pendingTasksCount ? ` (${pendingTasksCount})` : ""
   }`;
 
-  const toggleChecked = ({ _id, isChecked }) => {
-    // TasksCollection.update(_id, {
-    //   $set: {
-    //     isChecked: !isChecked,
-    //   },
-    // });
-    Meteor.call("tasks.setIsChecked", _id, !isChecked);
-  };
-
   const deleteTask = ({ _id }) => {
-    // TasksCollection.remove(_id);
     Meteor.call("tasks.remove", _id);
   };
 
@@ -82,6 +76,8 @@ export const App = () => {
                 {hideCompleted ? "Show All" : "Hide completed"}
               </button>
             </div>
+
+            {isLoading && <div className="flex flex-col h-full justify-center items-center font-bold">loading...</div>}
 
             <ul className="list-none px-4">
               {tasks.map((task) => (
