@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { TasksCollection } from '/imports/api/collections/TasksCollection';
 import { Accounts } from 'meteor/accounts-base';
+import '/imports/api/tasksMethods';
 
 const SEED_USERNAME = 'chlzd';
 const SEED_PASSWORD = '123456';

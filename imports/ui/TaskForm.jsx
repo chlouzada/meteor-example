@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TasksCollection } from "../api/collections/TasksCollection";
+import { Meteor } from "meteor/meteor";
 
 export default function TaskForm({ user }) {
   const [text, setText] = useState("");
@@ -9,11 +9,12 @@ export default function TaskForm({ user }) {
 
     if (!text) return;
 
-    TasksCollection.insert({
-      text: text.trim(),
-      userId: user._id,
-      createdAt: new Date(),
-    });
+    // TasksCollection.insert({
+    //   text: text.trim(),
+    //   userId: user._id,
+    //   createdAt: new Date(),
+    // });
+    Meteor.call("tasks.insert", text.trim());
 
     setText("");
   };

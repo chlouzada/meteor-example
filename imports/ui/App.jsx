@@ -44,15 +44,17 @@ export const App = () => {
   }`;
 
   const toggleChecked = ({ _id, isChecked }) => {
-    TasksCollection.update(_id, {
-      $set: {
-        isChecked: !isChecked,
-      },
-    });
+    // TasksCollection.update(_id, {
+    //   $set: {
+    //     isChecked: !isChecked,
+    //   },
+    // });
+    Meteor.call("tasks.setIsChecked", _id, !isChecked);
   };
 
   const deleteTask = ({ _id }) => {
-    TasksCollection.remove(_id);
+    // TasksCollection.remove(_id);
+    Meteor.call("tasks.remove", _id);
   };
 
   const handleFilterButton = () => {
