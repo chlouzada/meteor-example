@@ -39,7 +39,6 @@ export const App = () => {
   });
 
   const toggleChecked = ({ _id, isChecked }) => {
-
     Meteor.call("tasks.setIsChecked", _id, !isChecked);
   };
 
@@ -68,16 +67,24 @@ export const App = () => {
           <Fragment>
             <TaskForm user={user} />
 
-            <div className="flex justify-center">
+            <div className="flex justify-center pt-4">
               <button
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm md:text-base whitespace-nowrap"
                 onClick={handleFilterButton}
-                className="bg-blue-500 border rounded border-gray-600 px-2 py-1"
               >
-                {hideCompleted ? "Show All" : "Hide completed"}
+                {hideCompleted ? "Todas" : "Incompletas"}
               </button>
             </div>
 
-            {isLoading && <div className="flex flex-col h-full justify-center items-center font-bold">loading...</div>}
+            {isLoading && (
+              <div className="flex flex-col h-full justify-center items-center font-bold">
+                loading...
+              </div>
+            )}
+
+            {hideCompleted ? <div className="text-center text-sm text-gray-500 pt-3" >
+            Tarefas a fazer</div> : <div className="text-center text-sm text-gray-500 pt-4" >
+            Mostrando todas tarefas</div>}
 
             <ul className="list-none px-4">
               {tasks.map((task) => (
